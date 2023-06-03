@@ -1,0 +1,33 @@
+.contacts {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.contacts__item {
+  border-bottom: 1px solid lightgray;
+}
+
+.filterInput {
+  width: 300px;
+  box-sizing: border-box;
+}
+
+.contacts__btn {
+  margin-left: auto;
+  color: gray;
+  cursor: pointer;
+}
+
+.contacts__btn:hover,
+.contacts__btn:focus {
+  color: black;
+}
+
+.user__number {
+  display: flex;
+}
+
+.iconMoon {
+  margin-right: 1em;
+}

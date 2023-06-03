@@ -1,0 +1,38 @@
+.userForm {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  width: 100%;
+}
+
+.userForm__label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.userForm__input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.userForm__input:focus {
+  outline: none;
+  border-color: #4b9ce2;
+}
+
+.userForm__btn {
+  background-color: #4b9ce2;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.userForm__btn:hover,
+.userForm__btn:focus {
+  background-color: #1565c0;
+}

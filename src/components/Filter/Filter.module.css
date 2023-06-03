@@ -1,0 +1,14 @@
+.filterInput {
+  margin-bottom: 20px;
+  width: 300px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  box-sizing: border-box;
+}
+
+.userForm__label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
