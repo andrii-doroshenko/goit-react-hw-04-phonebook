@@ -1,80 +1,80 @@
 import PropTypes from 'prop-types';
-import { Component } from 'react';
-import { nanoid } from 'nanoid';
+import { useState } from 'react';
 import CSS from './UserForm.module.css';
 
-class UserForm extends Component {
-  static propTypes = {
-    onAddContact: PropTypes.func.isRequired,
+const UserForm = ({ onAddContact }) => {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
+
+  const handleStateChange = e => {
+    const { name, value } = e.target;
+
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'number':
+        setNumber(value);
+        break;
+      default:
+        console.log('Invalid field');
+        break;
+    }
   };
 
-  state = {
-    name: '',
-    number: '',
-  };
-
-  userId = nanoid(5);
-  userNumberId = nanoid(5);
-
-  handleNameChange = e => {
-    this.setState({ name: e.target.value });
-  };
-
-  handleNumberChange = e => {
-    this.setState({ number: e.target.value });
-  };
-
-  handleAddUser = e => {
+  const handleAddUser = e => {
     e.preventDefault();
-    const { name, number } = this.state;
-    this.props.onAddContact(name, number);
-    this.setState({ name: '', number: '' });
+    onAddContact(name, number);
+    setName('');
+    setNumber('');
   };
 
-  render() {
-    return (
-      <form
-        action=""
-        autoComplete="off"
-        className={CSS.userForm}
-        onSubmit={this.handleAddUser}
-      >
-        <label htmlFor={this.userId} className={CSS.userForm__label}>
-          Name
-        </label>
-        <input
-          type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+([ -][a-zA-Zа-яА-Я]+)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-          id={this.userId}
-          className={CSS.userForm__input}
-          value={this.state.name}
-          onChange={this.handleNameChange}
-        />
+  return (
+    <form
+      action=""
+      autoComplete="off"
+      className={CSS.userForm}
+      onSubmit={handleAddUser}
+    >
+      <label htmlFor="formNameInput" className={CSS.userForm__label}>
+        Name
+      </label>
+      <input
+        type="text"
+        name="name"
+        pattern="^[a-zA-Zа-яА-Я]+([ -][a-zA-Zа-яА-Я]+)*$"
+        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+        required
+        id="formNameInput"
+        className={CSS.userForm__input}
+        value={name}
+        onChange={handleStateChange}
+      />
 
-        <label htmlFor={this.userNumberId} className={CSS.userForm__label}>
-          Number
-        </label>
-        <input
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-          id={this.userNumberId}
-          className={CSS.userForm__input}
-          value={this.state.number}
-          onChange={this.handleNumberChange}
-        />
+      <label htmlFor="formNumberInput" className={CSS.userForm__label}>
+        Number
+      </label>
+      <input
+        type="tel"
+        name="number"
+        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+        required
+        id="formNumberInput"
+        className={CSS.userForm__input}
+        value={number}
+        onChange={handleStateChange}
+      />
 
-        <button type="submit" className={CSS.userForm__btn}>
-          Add contact
-        </button>
-      </form>
-    );
-  }
-}
+      <button type="submit" className={CSS.userForm__btn}>
+        Add contact
+      </button>
+    </form>
+  );
+};
+
+UserForm.propTypes = {
+  onAddContact: PropTypes.func.isRequired,
+};
 
 export default UserForm;
