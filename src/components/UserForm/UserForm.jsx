@@ -3,30 +3,23 @@ import { useState } from 'react';
 import CSS from './UserForm.module.css';
 
 const UserForm = ({ onAddContact }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [formData, setFormData] = useState({ name: '', number: '' });
 
   const handleStateChange = e => {
     const { name, value } = e.target;
 
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'number':
-        setNumber(value);
-        break;
-      default:
-        console.log('Invalid field');
-        break;
-    }
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
+
+  const { name, number } = formData;
 
   const handleAddUser = e => {
     e.preventDefault();
     onAddContact(name, number);
-    setName('');
-    setNumber('');
+    setFormData({ name: '', number: '' });
   };
 
   return (
